@@ -1,0 +1,140 @@
+/* ===== Corpo e fontes ===== */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background: #f5e9e0;
+    color: #333;
+}
+
+/* ===== Header / Menu ===== */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: #fffaf5;
+    flex-wrap: wrap;
+    /* Permite quebrar linha no mobile */
+}
+
+.header .logo {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+/* Links do menu */
+nav.menu {
+    display: flex;
+    flex-wrap: wrap;
+    /* Quebra links no mobile */
+    gap: 10px;
+}
+
+nav.menu a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+nav.menu a i {
+    margin-right: 8px;
+    /* Espaço entre ícone e texto */
+}
+
+nav.menu a:hover {
+    color: #e91e63;
+}
+
+/* ===== Hero Section ===== */
+.hero {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.hero h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.btn-main {
+    text-decoration: none;
+    background: #e91e63;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.btn-main:hover {
+    background: #d81b60;
+}
+
+/* ===== Logo na seção inicial ===== */
+.hero-logo-img {
+    display: block;
+    margin: 40px auto 0;
+    width: 300px;
+    max-width: 90%;
+    height: auto;
+    border-radius: 10px;
+    filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.2));
+    transition: transform 0.3s ease;
+}
+
+.hero-logo-img:hover {
+    transform: scale(1.05);
+}
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .hero h2 {
+        font-size: 1.7rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .btn-main {
+        padding: 10px 20px;
+    }
+
+    .hero-logo-img {
+        width: 250px;
+        margin-top: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h2 {
+        font-size: 1.5rem;
+    }
+
+    .hero p {
+        font-size: 0.95rem;
+    }
+
+    .hero-logo-img {
+        width: 180px;
+        margin-top: 20px;
+    }
+
+    nav.menu a {
+        font-size: 0.9rem;
+    }
+}

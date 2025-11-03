@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamento - Bruna Nail Designer</title>
+    <link rel="stylesheet" href="style-agendamento.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        crossorigin="anonymous">
+</head>
+
+<body>
+    <header class="header">
+        <h1>Bruna Nail Designer 💅</h1>
+        <nav class="nav-links">
+            <a href="index.html"><i class="fas fa-home"></i> Início</a>
+            <a href="gallery.html"><i class="fas fa-images"></i> Meus Trabalhos</a>
+            <a href="agendamento.html" class="active"><i class="fas fa-calendar-alt"></i> Agendamento</a>
+            <a href="https://www.instagram.com/brunasarmentonails/" target="_blank"><i class="fab fa-instagram"></i>
+                Instagram</a>
+            <a href="https://wa.me/5551986028455" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h2>Agende seu horário</h2>
+        <p>Escolha o serviço, a data e o horário disponível:</p>
+
+        <div class="booking-box">
+            <label for="clientName">Seu Nome:</label>
+            <input type="text" id="clientName" placeholder="Digite seu nome" required />
+
+            <label for="clientPhone">Seu WhatsApp:</label>
+            <input type="tel" id="clientPhone" placeholder="(99) 99999-9999" required />
+
+            <label for="serviceSelect">Escolha o serviço:</label>
+            <select id="serviceSelect">
+                <option value="">Selecione...</option>
+                <option value="Blindagem">Blindagem (2h)</option>
+                <option value="Esmaltação em Gel">Esmaltação em Gel (2h)</option>
+                <option value="Banho de Gel">Banho de Gel (2h)</option>
+                <option value="Alongamento Molde F1">Alongamento Molde F1 (3h)</option>
+            </select>
+
+            <label for="dateInput">Escolha a data:</label>
+            <input type="text" id="dateInput" placeholder="Selecione a data" />
+
+            <div class="times-wrapper">
+                <h3>Horários disponíveis:</h3>
+                <div id="timesContainer" class="times-container"></div>
+            </div>
+
+            <button id="confirmBooking" class="confirm-btn">Confirmar Agendamento</button>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="agendamento.js"></script>
+    <script>
+        // Inicializa Flatpickr com formato brasileiro
+        flatpickr("#dateInput", {
+            minDate: "today",
+            dateFormat: "d/m/Y",
+            locale: {
+                firstDayOfWeek: 1,
+                weekdays: {
+                    shorthand: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+                    longhand: [
+                        'Domingo', 'Segunda-feira', 'Terça-feira',
+                        'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'
+                    ],
+                },
+                months: {
+                    shorthand: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                    longhand: [
+                        'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+                        'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+                    ],
+                },
+            },
+        });
+    </script>
+
+</body>
+
+</html>
