@@ -2,35 +2,27 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Agendamento - Bruna Nail Designer 💅</title>
 
-    <!-- CSS principal -->
-    <link rel="stylesheet" href="/style-agendamento.css">
-
-    <!-- Biblioteca de calendário -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-
-    <!-- Ícones -->
+    <link rel="stylesheet" href="/style-agendamento.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <!-- Configuração PWA -->
-    <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#f5e9e0">
-
-    <!-- Ícone do site/app -->
-    <link rel="icon" href="/imagens/icon-192.png" type="image/png">
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#f5e9e0" />
+    <link rel="icon" href="/imagens/icon-192.png" type="image/png" />
 </head>
 
 <body>
     <header class="header">
         <h1>Bruna Nail Designer 💅</h1>
         <nav class="nav-links">
-            <a href="index.html"><i class="fas fa-home"></i> Início</a>
-            <a href="gallery.html"><i class="fas fa-images"></i> Meus Trabalhos</a>
-            <a href="agendamento.html" class="active"><i class="fas fa-calendar-alt"></i> Agendamento</a>
+            <a href="/index.html"><i class="fas fa-home"></i> Início</a>
+            <a href="/gallery.html"><i class="fas fa-images"></i> Meus Trabalhos</a>
+            <a href="/agendamento.html" class="active"><i class="fas fa-calendar-alt"></i> Agendamento</a>
             <a href="https://www.instagram.com/brunasarmentonails/" target="_blank"><i class="fab fa-instagram"></i>
                 Instagram</a>
             <a href="https://wa.me/5551986028455" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
@@ -71,9 +63,8 @@
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="agendamento.js"></script>
+    <script src="/agendamento.js"></script>
     <script>
-        // Inicializa Flatpickr com formato brasileiro
         flatpickr("#dateInput", {
             minDate: "today",
             dateFormat: "d/m/Y",
@@ -81,22 +72,15 @@
                 firstDayOfWeek: 1,
                 weekdays: {
                     shorthand: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
-                    longhand: [
-                        'Domingo', 'Segunda-feira', 'Terça-feira',
-                        'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'
-                    ],
+                    longhand: ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado']
                 },
                 months: {
                     shorthand: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-                    longhand: [
-                        'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-                        'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
-                    ],
-                },
-            },
+                    longhand: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
+                }
+            }
         });
     </script>
-
 </body>
 
 </html>
