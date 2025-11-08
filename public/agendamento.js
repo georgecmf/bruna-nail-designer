@@ -108,7 +108,7 @@ Agradecemos imensamente pela sua confiança e preferência! 💖
 Caso haja qualquer alteração ou imprevisto, entraremos em contato previamente para ajustar da melhor forma.
 
 Atenciosamente,  
-*Bru Nail Designer 💅*`;
+*Bruna Nail Designer 💅*`;
 
     // Formata telefone do cliente
     const clientNumber = phone.replace(/\D/g, ""); // remove tudo que não é número

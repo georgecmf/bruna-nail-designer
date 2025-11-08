@@ -1,4 +1,4 @@
-const CACHE_NAME = "bruna-nail-cache-v2";
+const CACHE_NAME = "bruna-nail-cache-v3"; // ⬅️ só muda a versão
 const urlsToCache = [
     "/",
     "/index.html",
@@ -26,6 +26,7 @@ self.addEventListener("install", (event) => {
             })
             .catch((err) => console.error("❌ Erro ao adicionar arquivos no cache:", err))
     );
+    self.skipWaiting(); // ⚡ força ativação imediata da nova versão
 });
 
 // Ativa o SW e remove caches antigos
@@ -43,6 +44,7 @@ self.addEventListener("activate", (event) => {
             )
         )
     );
+    self.clients.claim(); // ⚡ faz as abas usarem o novo SW imediatamente
 });
 
 // Busca arquivos do cache primeiro (offline)
