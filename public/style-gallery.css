@@ -56,17 +56,26 @@ nav.menu a:hover {
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
+    gap: 25px;
 }
+
 
 .gallery-grid img {
     width: 100%;
-    border-radius: 10px;
-    transition: transform 0.3s ease;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 16px;
+    cursor: pointer;
+
+    /* efeito flutuante */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+
 .gallery-grid img:hover {
-    transform: scale(1.05);
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 16px 35px rgba(0, 0, 0, 0.2);
 }
 
 /* ===== RESPONSIVO ===== */
@@ -174,4 +183,38 @@ nav.menu a:hover {
 .insta-logo {
     width: 24px;
     height: 24px;
+}
+
+/* ===== Navegação Lightbox ===== */
+.lightbox .nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    color: white;
+    font-size: 2.5rem;
+    padding: 10px 16px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: 0.2s;
+}
+
+.lightbox .nav:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.lightbox .prev {
+    left: 20px;
+}
+
+.lightbox .next {
+    right: 20px;
+}
+
+@media (max-width: 480px) {
+    .lightbox .nav {
+        font-size: 2rem;
+        padding: 8px 12px;
+    }
 }

@@ -6,6 +6,10 @@ const clientPhone = document.getElementById("clientPhone");
 const confirmBtn = document.getElementById("confirmBooking");
 let selectedTime = null;
 
+const OPEN_HOUR = 9;        // abre às 09h
+const CLOSE_HOUR = 19;     // fecha às 19h (permite iniciar serviço às 18h)
+const BREAK_TIME = 0.5;
+
 // Duração (em horas) e valor de cada serviço
 const services = {
     "Alongamento Molde F1": { duration: 3, price: 80 },
@@ -31,25 +35,44 @@ try {
 function renderTimes() {
     timesContainer.innerHTML = "";
 
-    const service = serviceSelect.value;
     const date = dateInput.value;
 
-    if (!service || !date) {
+    if (!date) {
         timesContainer.innerHTML =
-            "<p class='info-text'>Escolha um serviço e uma data para ver os horários disponíveis.</p>";
+            "<p class='info-text'>Escolha uma data para ver os horários disponíveis.</p>";
         return;
     }
 
-    const { duration } = services[service];
     let hasAvailable = false;
 
+    // Data selecionada
+    const [day, month, year] = date.split("/");
+    const selectedDate = new Date(year, month - 1, day);
+
+    // Data atual
+    const now = new Date();
+    const isToday =
+        selectedDate.getDate() === now.getDate() &&
+        selectedDate.getMonth() === now.getMonth() &&
+        selectedDate.getFullYear() === now.getFullYear();
+
+    const currentHour = now.getHours();
+
     allHours.forEach((hour) => {
-        const conflict = bookings.some(
-            (b) =>
+        // ❌ Remove horários passados se for hoje
+        if (isToday && hour <= currentHour) return;
+
+        // Verifica conflito APENAS com agendamentos existentes
+        const conflict = bookings.some((b) => {
+            const bookingStart = b.hour;
+            const bookingEnd = b.hour + b.duration + BREAK_TIME;
+
+            return (
                 b.date === date &&
-                ((hour >= b.hour && hour < b.hour + b.duration) ||
-                    (hour + duration > b.hour && hour + duration <= b.hour + b.duration))
-        );
+                hour >= bookingStart &&
+                hour < bookingEnd
+            );
+        });
 
         const btn = document.createElement("button");
         btn.textContent = `${hour}:00`;
@@ -61,7 +84,9 @@ function renderTimes() {
             hasAvailable = true;
             btn.addEventListener("click", () => {
                 selectedTime = hour;
-                Array.from(timesContainer.children).forEach((c) => c.classList.remove("selected"));
+                Array.from(timesContainer.children).forEach((c) =>
+                    c.classList.remove("selected")
+                );
                 btn.classList.add("selected");
             });
         }
@@ -71,9 +96,11 @@ function renderTimes() {
 
     if (!hasAvailable) {
         timesContainer.innerHTML =
-            "<p class='info-text'>Nenhum horário disponível nesta data. Escolha outra.</p>";
+            "<p class='info-text'>Nenhum horário disponível nesta data.</p>";
     }
 }
+
+
 
 // Eventos
 serviceSelect.addEventListener("change", renderTimes);

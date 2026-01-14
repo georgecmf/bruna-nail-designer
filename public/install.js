@@ -4,7 +4,7 @@ const installButton = document.getElementById("installButton");
 window.addEventListener("beforeinstallprompt", (e) => {
     e.preventDefault();
     deferredPrompt = e;
-    installButton.style.display = "block"; // mostra o botão
+    installButton.style.display = "block";
 
     installButton.addEventListener("click", async () => {
         installButton.style.display = "none";
