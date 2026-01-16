@@ -244,3 +244,14 @@ body {
         padding: 15px;
     }
 }
+
+.booking-box select {
+    appearance: auto;
+    -webkit-appearance: menulist;
+    -moz-appearance: menulist;
+    height: auto;
+}
+
+.booking-box select option {
+    padding: 8px;
+}
