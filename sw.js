@@ -1,10 +1,6 @@
-const CACHE_NAME = "bruna-nail-cache-v3"; // ⬅️ só muda a versão
-const urlsToCache = [
-    "/",
-    "/index.html",
-    "/agendamento.html",
-    "/meustrabalhos.html",
-    "/login.html",
+const CACHE_NAME = "bruna-nail-cache-v4";
+
+const STATIC_ASSETS = [
     "/style-index.css",
     "/style-agendamento.css",
     "/style-meustrabalhos.css",
@@ -15,63 +11,45 @@ const urlsToCache = [
     "/imagens/icon-512.png"
 ];
 
-// Instala o service worker e salva arquivos no cache
+// INSTALL
 self.addEventListener("install", (event) => {
-    console.log("🟡 Instalando Service Worker...");
     event.waitUntil(
-        caches.open(CACHE_NAME)
-            .then((cache) => {
-                console.log("✅ Arquivos armazenados no cache:", urlsToCache);
-                return cache.addAll(urlsToCache);
-            })
-            .catch((err) => console.error("❌ Erro ao adicionar arquivos no cache:", err))
+        caches.open(CACHE_NAME).then((cache) => cache.addAll(STATIC_ASSETS))
     );
-    self.skipWaiting(); // ⚡ força ativação imediata da nova versão
+    self.skipWaiting();
 });
 
-// Ativa o SW e remove caches antigos
+// ACTIVATE
 self.addEventListener("activate", (event) => {
-    console.log("🟢 Service Worker ativado");
     event.waitUntil(
-        caches.keys().then((cacheNames) =>
+        caches.keys().then((keys) =>
             Promise.all(
-                cacheNames.map((cache) => {
-                    if (cache !== CACHE_NAME) {
-                        console.log("🧹 Removendo cache antigo:", cache);
-                        return caches.delete(cache);
-                    }
-                })
+                keys.map((key) => key !== CACHE_NAME && caches.delete(key))
             )
         )
     );
-    self.clients.claim(); // ⚡ faz as abas usarem o novo SW imediatamente
+    self.clients.claim();
 });
 
-// Busca arquivos do cache primeiro (offline)
+// FETCH
 self.addEventListener("fetch", (event) => {
+    const { request } = event;
+
+    // 🔥 HTML → sempre da rede
+    if (request.destination === "document") {
+        event.respondWith(fetch(request));
+        return;
+    }
+
+    // 🎨 Arquivos estáticos → cache first
     event.respondWith(
-        caches.match(event.request).then((response) => {
-            if (response) {
-                return response; // retorna do cache
-            }
-            // tenta buscar online e adiciona ao cache dinamicamente
-            return fetch(event.request)
-                .then((networkResponse) => {
-                    if (!networkResponse || networkResponse.status !== 200) {
-                        return networkResponse;
-                    }
-                    const clonedResponse = networkResponse.clone();
-                    caches.open(CACHE_NAME).then((cache) => {
-                        cache.put(event.request, clonedResponse);
-                    });
-                    return networkResponse;
-                })
-                .catch(() => {
-                    // fallback offline opcional
-                    if (event.request.destination === "document") {
-                        return caches.match("/index.html");
-                    }
+        caches.match(request).then((cached) => {
+            return cached || fetch(request).then((response) => {
+                return caches.open(CACHE_NAME).then((cache) => {
+                    cache.put(request, response.clone());
+                    return response;
                 });
+            });
         })
     );
 });
