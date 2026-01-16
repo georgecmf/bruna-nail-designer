@@ -12,11 +12,13 @@ const BREAK_TIME = 0.5;
 
 // Duração (em horas) e valor de cada serviço
 const services = {
-    "Alongamento Molde F1": { duration: 3, price: 80 },
+    "Alongamento Molde F1": { duration: 3, price: 100 },
     "Remoção": { duration: 1, price: 30 },
-    "Manutenção Molde F1": { duration: 2, price: 70 },
-    "Blindagem": { duration: 2, price: 45 },
-    "Banho em Gel": { duration: 2, price: 60 }
+    "Manutenção Molde F1": { duration: 2, price: 80 },
+    "Blindagem": { duration: 2, price: 55 },
+    "Banho em Gel": { duration: 2, price: 80 },
+    "Unha Encapsulada": { duration: 1, price: 10 },
+    "Reposição de Unha Quebrada": { duration: 1, price: 5 }
 };
 
 // Horários disponíveis
@@ -152,7 +154,7 @@ Atenciosamente,
     );
 
     // Mensagem para você (profissional)
-    const yourNumber = "5551986028455";
+    const yourNumber = "5551985433830";
     const messageBru = `📢 *Novo agendamento recebido!*
 
 👤 *Cliente:* ${name}
